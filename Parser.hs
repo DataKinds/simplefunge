@@ -23,10 +23,15 @@ module Parser where
                     End
                     deriving (Show, Eq)
 
+
     type Stack = [Int]
     type TwoDimProgramChar = [[Char]]
     type TwoDimProgram = [[Commands]]
     type Coords = (Int, Int)
+
+    extractNum :: PushInt -> Int
+    extractNum (PushInt n) = n
+
 
     programStringToChar :: String -> TwoDimProgramChar
     programStringToChar string = lines string

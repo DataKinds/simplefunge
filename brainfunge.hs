@@ -20,8 +20,8 @@ commandRun program stack@(shead:smid:stail) (x, y) direction
     | program `getFromArray` (x, y) == MoveRight = loopCommands program stack (x, y) "right" False
     | program `getFromArray` (x, y) == MoveUp = loopCommands program stack (x, y) "up" False
     | program `getFromArray` (x, y) == MoveDown = loopCommands program stack (x, y) "down" False
---    | program `getFromArray` (x, y) == IfHorizontal = 
---    | program `getFromArray` (x, y) == IfVertical = 
+    | program `getFromArray` (x, y) == IfHorizontal = loopCommands program stack (x, y) (if shead>0 then "right" else "left") False
+    | program `getFromArray` (x, y) == IfVertical = loopCommands program stack (x, y) (if shead>0 then "up" else "down") False
     | program `getFromArray` (x, y) == InputChar = do
         char <- getChar
         loopCommands program ((ord char):stack) (x, y) direction False
@@ -37,7 +37,7 @@ commandRun program stack@(shead:smid:stail) (x, y) direction
     | program `getFromArray` (x, y) == OutputNewline = do
         putStrLn ""
         loopCommands program stack (x, y) direction False
-    | program `getFromArray` (x, y) == PushInt n = loopCommands program n:stack (x, y) direction False
+    | program `getFromArray` (x, y) == PushInt = loopCommands program (extractNum (program `getFromArray` (x, y))):stack (x, y) direction False
     | program `getFromArray` (x, y) == Add = loopCommands program ((shead + smid):stail) (x, y) direction False
     | program `getFromArray` (x, y) == Sub = loopCommands program ((shead - smid):stail) (x, y) direction False
     | program `getFromArray` (x, y) == Mult = loopCommands program ((shead * smid):stail) (x, y) direction False
