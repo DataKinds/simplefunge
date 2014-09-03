@@ -26,13 +26,15 @@
 
 - * = multiply numbers on top of stack
 
-- / = divide numbers on top of stack, going backwards, as in "top / second to top"
+- / = divide numbers on top of stack, going backwards, as in "top / second to top", and places the result on the stack with the top being "divisor", then the next being "remainder"
 
 - ^ = exponent numbers on top of stack, going backwards, as in "second to top ^ top"
 
 - ` =  pop top of stack
 
 - ! = duplicate top of stack (OH GOD THERE ARE TWO OF THEM)
+
+- & = switch top two values in the stack
 
 - (space) = continue direction of cursor
 

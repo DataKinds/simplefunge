@@ -15,7 +15,7 @@ loopCommands program stack (x, y) "up" False = commandRun program stack (x, y-1)
 loopCommands program stack (x, y) "down" False = commandRun program stack (x, y+1) "down"
 
 commandRun :: TwoDimProgram -> Stack -> Coords -> String -> IO ()
-commandRun program stack@(shead:stail) (x, y) direction
+commandRun program stack@(shead:smid:stail) (x, y) direction
     | program `getFromArray` (x, y) == MoveLeft = loopCommands program stack (x, y) "left" False
     | program `getFromArray` (x, y) == MoveRight = loopCommands program stack (x, y) "right" False
     | program `getFromArray` (x, y) == MoveUp = loopCommands program stack (x, y) "up" False
@@ -37,13 +37,15 @@ commandRun program stack@(shead:stail) (x, y) direction
     | program `getFromArray` (x, y) == OutputNewline = do
         putStrLn ""
         loopCommands program stack (x, y) direction False
---    | program `getFromArray` (x, y) == Add = 
---    | program `getFromArray` (x, y) == Sub = 
---    | program `getFromArray` (x, y) == Mult = 
---    | program `getFromArray` (x, y) == Div = 
---    | program `getFromArray` (x, y) == Exp =  
-    | program `getFromArray` (x, y) == Pop = loopCommands program stail (x, y) direction False
---    | program `getFromArray` (x, y) == Dup = 
+    | program `getFromArray` (x, y) == PushInt n = loopCommands program n:stack (x, y) direction False
+    | program `getFromArray` (x, y) == Add = loopCommands program ((shead + smid):stail) (x, y) direction False
+    | program `getFromArray` (x, y) == Sub = loopCommands program ((shead - smid):stail) (x, y) direction False
+    | program `getFromArray` (x, y) == Mult = loopCommands program ((shead * smid):stail) (x, y) direction False
+    | program `getFromArray` (x, y) == Div = loopCommands program ((shead / smid):stail) (x, y) direction False
+    | program `getFromArray` (x, y) == Exp = loopCommands program ((smid ** shead):stail) (x, y) direction False
+    | program `getFromArray` (x, y) == Pop = loopCommands program (smid:stail) (x, y) direction False
+    | program `getFromArray` (x, y) == Dup = loopCommands program (shead:shead:smid:stail) (x, y) direction False
+    | program `getFromArray` (x, y) == Switch = loopCommands program (smid:shead:stail) (x, y) direction False
     | program `getFromArray` (x, y) == End = loopCommands program stack (x, y) direction True
     | program `getFromArray` (x, y) == Noop = loopCommands program stack (x, y) direction False
 

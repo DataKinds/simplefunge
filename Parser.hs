@@ -18,6 +18,7 @@ module Parser where
                     Exp |
                     Pop |
                     Dup |
+                    Switch |
                     Noop |
                     End
                     deriving (Show, Eq)
@@ -50,6 +51,7 @@ module Parser where
               charToCommand ',' = Exp
               charToCommand '`' = Pop
               charToCommand '!' = Dup
+              charToCommand '&' = Switch
               charToCommand '@' = End
               charToCommand ' ' = Noop
               charToCommand '0' = PushInt 0
