@@ -32,7 +32,6 @@ module Parser where
     extractNum :: PushInt -> Int
     extractNum (PushInt n) = n
 
-
     programStringToChar :: String -> TwoDimProgramChar
     programStringToChar string = lines string
 
