@@ -1,42 +1,42 @@
-< = move cursor left until a direction change command is encountered
+- < = move cursor left until a direction change command is encountered
 
-(greater than sign because github thinks it's something else) = move cursor right until a direction change command is encountered
+- > = move cursor right until a direction change command is encountered
 
-^ = move cursor up until a direction change command is encountered
+- ^ = move cursor up until a direction change command is encountered
 
-v = move cursor down until a direction change command is encountered
+- v = move cursor down until a direction change command is encountered
 
-H = move cursor right if top of stack is >0 or left otherwise
+- H = move cursor right if top of stack is >0 or left otherwise
 
-V = move cursor up if top of stack is >0 or down otherwise
+- V = move cursor up if top of stack is >0 or down otherwise
 
-I = input character
+- I = input character
 
-i = input integer
+- i = input integer
 
-O = output character
+- O = output character
 
-o = output integer
+- o = output integer
 
-0-9 = push number to top of stack
+- 0-9 = push number to top of stack
 
-+ = add numbers on top of stack
-+ 
-- = subtract numbers on top of stack, going backwards, as in "top - second to top"
-- 
-* = multiply numbers on top of stack
-* 
-/ = divide numbers on top of stack, going backwards, as in "top / second to top"
+- + = add numbers on top of stack
 
-^ = exponent numbers on top of stack, going backwards, as in "second to top ^ top"
+- - = subtract numbers on top of stack, going backwards, as in "top - second to top"
 
-` =  pop top of stack
+- * = multiply numbers on top of stack
 
-! = duplicate top of stack (OH GOD THERE ARE TWO OF THEM)
+- / = divide numbers on top of stack, going backwards, as in "top / second to top"
 
- (space) = continue direction of cursor
+- ^ = exponent numbers on top of stack, going backwards, as in "second to top ^ top"
 
-@ = end of program
+- ` =  pop top of stack
+
+- ! = duplicate top of stack (OH GOD THERE ARE TWO OF THEM)
+
+- (space) = continue direction of cursor
+
+- @ = end of program
 
 note: characters get converted to integers on the stack
 
