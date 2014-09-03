@@ -1,5 +1,5 @@
 < = move cursor left until a direction change command is encountered
-> = move cursor right until a direction change command is encountered
+(greater than sign because github thinks it's something else) = move cursor right until a direction change command is encountered
 ^ = move cursor up until a direction change command is encountered
 v = move cursor down until a direction change command is encountered
 H = move cursor right if top of stack is >0 or left otherwise
