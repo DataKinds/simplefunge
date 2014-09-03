@@ -20,6 +20,8 @@
 
 - 0-9 = push number to top of stack
 
+note: characters get converted to integers on the stack
+
 - + = add numbers on top of stack
 
 - - = subtract numbers on top of stack, going backwards, as in "top - second to top"
@@ -32,11 +34,15 @@
 
 - ! = duplicate top of stack (OH GOD THERE ARE TWO OF THEM)
 
-- & = switch top two values in the stack
+- % = switch the top two values on the stack
+
+- | = pop the top of the stack, then move the value from that index to the top
+
+- . = pop the top of the stack, then move the next top value to that index
+
+note: the top of the stack is index 0
 
 - (space) = continue direction of cursor
 
 - @ = end of program
-
-note: characters get converted to integers on the stack
 

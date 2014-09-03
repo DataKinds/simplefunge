@@ -54,6 +54,8 @@ commandRun program stack@(shead:smid:stail) (x, y) direction
     | program `getFromArray` (x, y) == Pop = loopCommands program (smid:stail) (x, y) direction False
     | program `getFromArray` (x, y) == Dup = loopCommands program (shead:shead:smid:stail) (x, y) direction False
     | program `getFromArray` (x, y) == Switch = loopCommands program (smid:shead:stail) (x, y) direction False
+    | program `getFromArray` (x, y) == MoveFrom = loopCommands program ((stack !! shead):smid:((take (shead-1) stack)++(drop shead stack))) (x, y) direction False
+    | program `getFromArray` (x, y) == MoveTo = loopCommands program ((take shead stail)++[smid]++(drop shead stail)) (x, y) direction False
     | program `getFromArray` (x, y) == End = loopCommands program stack (x, y) direction True
     | program `getFromArray` (x, y) == Noop = loopCommands program stack (x, y) direction False
 

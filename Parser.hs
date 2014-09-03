@@ -27,6 +27,8 @@ module Parser where
                     Pop |
                     Dup |
                     Switch |
+                    MoveFrom |
+                    MoveTo |
                     Noop |
                     End
                     deriving (Show, Eq)
@@ -60,6 +62,8 @@ module Parser where
               charToCommand '`' = Pop
               charToCommand '!' = Dup
               charToCommand '&' = Switch
+              charToCommand '|' = MoveFrom
+              charToCommand '.' = MoveTo
               charToCommand '@' = End
               charToCommand ' ' = Noop
               charToCommand '0' = N0
