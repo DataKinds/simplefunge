@@ -26,9 +26,10 @@ commandRun program stack (x, y) direction
         char <- getChar
         loopCommands program ((ord char):stack) (x, y) direction False
     | program `getFromArray` (x, y) == InputInt = do
-        
+        int <- getLine
+        loopCommands program ((read int):stack) (x, y) direction False
     | program `getFromArray` (x, y) == OutputChar = do
-        putStrLn "test"
+        putChar $ chr $ head stack
         loopCommands program stack (x, y) direction False
 --    | program `getFromArray` (x, y) == OutputInt = 
 --    | program `getFromArray` (x, y) == Add = 
