@@ -31,7 +31,9 @@ commandRun program stack (x, y) direction
     | program `getFromArray` (x, y) == OutputChar = do
         putChar $ chr $ head stack
         loopCommands program stack (x, y) direction False
---    | program `getFromArray` (x, y) == OutputInt = 
+    | program `getFromArray` (x, y) == OutputInt = do
+        putStr $ show $ head stack
+        loopCommands program stack (x, y) direction False
 --    | program `getFromArray` (x, y) == Add = 
 --    | program `getFromArray` (x, y) == Sub = 
 --    | program `getFromArray` (x, y) == Mult = 
