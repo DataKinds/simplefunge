@@ -15,7 +15,7 @@ loopCommands program stack (x, y) "up" False = commandRun program stack (x, y-1)
 loopCommands program stack (x, y) "down" False = commandRun program stack (x, y+1) "down"
 
 commandRun :: TwoDimProgram -> Stack -> Coords -> String -> IO ()
-commandRun program stack (x, y) direction
+commandRun program stack@(shead:stail) (x, y) direction
     | program `getFromArray` (x, y) == MoveLeft = loopCommands program stack (x, y) "left" False
     | program `getFromArray` (x, y) == MoveRight = loopCommands program stack (x, y) "right" False
     | program `getFromArray` (x, y) == MoveUp = loopCommands program stack (x, y) "up" False
@@ -34,16 +34,20 @@ commandRun program stack (x, y) direction
     | program `getFromArray` (x, y) == OutputInt = do
         putStr $ show $ head stack
         loopCommands program stack (x, y) direction False
+    | program `getFromArray` (x, y) == OutputNewline = do
+        putStrLn ""
+        loopCommands program stack (x, y) direction False
 --    | program `getFromArray` (x, y) == Add = 
 --    | program `getFromArray` (x, y) == Sub = 
 --    | program `getFromArray` (x, y) == Mult = 
 --    | program `getFromArray` (x, y) == Div = 
 --    | program `getFromArray` (x, y) == Exp =  
---    | program `getFromArray` (x, y) == Pop = 
+    | program `getFromArray` (x, y) == Pop = loopCommands program stail (x, y) direction False
 --    | program `getFromArray` (x, y) == Dup = 
---    | program `getFromArray` (x, y) == End = 
---    | program `getFromArray` (x, y) == Noop = 
+    | program `getFromArray` (x, y) == End = loopCommands program stack (x, y) direction True
+    | program `getFromArray` (x, y) == Noop = loopCommands program stack (x, y) direction False
 
 main = do
-    code <- getLine
+    file <- getLine
+    code <- readFile file
     commandRun ((charToProgram . programStringToChar) code) (zeroStack) (0, 0) ("left")

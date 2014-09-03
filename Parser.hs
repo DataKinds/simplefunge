@@ -9,6 +9,7 @@ module Parser where
                     InputInt |
                     OutputChar |
                     OutputInt |
+                    OutputNewline |
                     PushInt Int |
                     Add |
                     Sub |
@@ -41,6 +42,7 @@ module Parser where
               charToCommand 'i' = InputInt
               charToCommand 'O' = OutputChar
               charToCommand 'o' = OutputInt
+              charToCommand 'n' = OutputNewline
               charToCommand '+' = Add
               charToCommand '-' = Sub
               charToCommand '*' = Mult
