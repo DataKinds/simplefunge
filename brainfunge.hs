@@ -62,7 +62,7 @@ commandRun program stack@(shead:smid:stail) (x, y) direction =
     Sub -> loopCommands program ((shead - smid):stail) (x, y) direction False
     Mult -> loopCommands program ((shead * smid):stail) (x, y) direction False
     Div -> loopCommands program ((fst (shead `divMod` smid)):(snd (shead `divMod` smid)):stail) (x, y) direction False
-    Pop -> loopCommands program (smid:stail) (x, y) direction False
+    Pop -> loopCommands program (drop 1 stack) (x, y) direction False
     Dup -> loopCommands program (shead:shead:smid:stail) (x, y) direction False
     Switch -> loopCommands program (smid:shead:stail) (x, y) direction False
     MoveFrom -> loopCommands program ((stack !! shead):smid:((take (shead-1) stack)++(drop shead stack))) (x, y) direction False
