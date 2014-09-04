@@ -36,7 +36,7 @@ note: characters get converted to integers on the stack
 
 - ! = duplicate top of stack (OH GOD THERE ARE TWO OF THEM)
 
-- % = switch the top two values on the stack
+- & = switch the top two values on the stack
 
 - | = pop the top of the stack, then move the value from that index to the top
 
