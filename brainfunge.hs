@@ -1,5 +1,6 @@
 import Parser
 import Data.Char
+import System.Environment
 
 zeroStack :: Stack
 zeroStack = repeat 0
@@ -60,6 +61,6 @@ commandRun program stack@(shead:smid:stail) (x, y) direction
     | program `getFromArray` (x, y) == Noop = loopCommands program stack (x, y) direction False
 
 main = do
-    file <- getLine
-    code <- readFile file
+    file <- getArgs
+    code <- readFile $ head file
     commandRun ((charToProgram . programStringToChar) code) (zeroStack) (0, 0) ("left")
