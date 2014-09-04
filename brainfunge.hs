@@ -16,6 +16,13 @@ loopCommands program stack (x, y) RightD False = commandRun program stack (x+1, 
 loopCommands program stack (x, y) UpD False = commandRun program stack (x, y-1) UpD
 loopCommands program stack (x, y) DownD False = commandRun program stack (x, y+1) DownD
 
+getCharWithoutNewline :: IO Char
+getCharWithoutNewline = do
+    c <- getChar
+    if c == '\n' then
+        getCharWithoutNewline
+        else return c
+
 commandRun :: TwoDimProgram -> Stack -> Coords -> Directions -> IO ()
 commandRun program stack@(shead:smid:stail) (x, y) direction = 
     case program `getFromArray` (x, y) of
@@ -26,7 +33,7 @@ commandRun program stack@(shead:smid:stail) (x, y) direction =
     IfHorizontal -> loopCommands program stack (x, y) (if shead>0 then RightD else LeftD) False
     IfVertical -> loopCommands program stack (x, y) (if shead>0 then UpD else DownD) False
     InputChar -> do
-        char <- getChar
+        char <- getCharWithoutNewline
         loopCommands program ((ord char):stack) (x, y) direction False
     InputInt -> do
         int <- getLine
