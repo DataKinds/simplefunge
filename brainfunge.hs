@@ -8,21 +8,21 @@ zeroStack = repeat 0
 getFromArray :: [[a]] -> Coords -> a
 getFromArray array (x, y) = (array !! y) !! x
 
-loopCommands :: TwoDimProgram -> Stack -> Coords -> String -> Bool -> IO ()
+loopCommands :: TwoDimProgram -> Stack -> Coords -> Directions -> Bool -> IO ()
 loopCommands _ _ _ _ True = return ()
-loopCommands program stack (x, y) "left" False = commandRun program stack (x-1, y) "left"
-loopCommands program stack (x, y) "right" False = commandRun program stack (x+1, y) "right"
-loopCommands program stack (x, y) "up" False = commandRun program stack (x, y-1) "up"
-loopCommands program stack (x, y) "down" False = commandRun program stack (x, y+1) "down"
+loopCommands program stack (x, y) LeftD False = commandRun program stack (x-1, y) LeftD
+loopCommands program stack (x, y) RightD False = commandRun program stack (x+1, y) RightD
+loopCommands program stack (x, y) UpD False = commandRun program stack (x, y-1) UpD
+loopCommands program stack (x, y) DownD False = commandRun program stack (x, y+1) DownD
 
-commandRun :: TwoDimProgram -> Stack -> Coords -> String -> IO ()
+commandRun :: TwoDimProgram -> Stack -> Coords -> Directions -> IO ()
 commandRun program stack@(shead:smid:stail) (x, y) direction
-    | program `getFromArray` (x, y) == MoveLeft = loopCommands program stack (x, y) "left" False
-    | program `getFromArray` (x, y) == MoveRight = loopCommands program stack (x, y) "right" False
-    | program `getFromArray` (x, y) == MoveUp = loopCommands program stack (x, y) "up" False
-    | program `getFromArray` (x, y) == MoveDown = loopCommands program stack (x, y) "down" False
-    | program `getFromArray` (x, y) == IfHorizontal = loopCommands program stack (x, y) (if shead>0 then "right" else "left") False
-    | program `getFromArray` (x, y) == IfVertical = loopCommands program stack (x, y) (if shead>0 then "up" else "down") False
+    | program `getFromArray` (x, y) == MoveLeft = loopCommands program stack (x, y) LeftD False
+    | program `getFromArray` (x, y) == MoveRight = loopCommands program stack (x, y) RightD False
+    | program `getFromArray` (x, y) == MoveUp = loopCommands program stack (x, y) UpD False
+    | program `getFromArray` (x, y) == MoveDown = loopCommands program stack (x, y) DownD False
+    | program `getFromArray` (x, y) == IfHorizontal = loopCommands program stack (x, y) (if shead>0 then RightD else LeftD) False
+    | program `getFromArray` (x, y) == IfVertical = loopCommands program stack (x, y) (if shead>0 then UpD else DownD) False
     | program `getFromArray` (x, y) == InputChar = do
         char <- getChar
         loopCommands program ((ord char):stack) (x, y) direction False
@@ -63,4 +63,4 @@ commandRun program stack@(shead:smid:stail) (x, y) direction
 main = do
     file <- getArgs
     code <- readFile $ head file
-    commandRun ((charToProgram . programStringToChar) code) (zeroStack) (0, 0) ("left")
+    commandRun ((charToProgram . programStringToChar) code) (zeroStack) (0, 0) (LeftD)

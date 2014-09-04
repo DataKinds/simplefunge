@@ -32,7 +32,7 @@ module Parser where
                     Noop |
                     End
                     deriving (Show, Eq)
-
+    data Directions = UpD | DownD | LeftD | RightD
 
     type Stack = [Int]
     type TwoDimProgramChar = [[Char]]
