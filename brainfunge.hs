@@ -1,6 +1,7 @@
 import Parser
 import Data.Char
 import System.Environment
+import System.IO
 
 zeroStack :: Stack
 zeroStack = repeat 0
@@ -31,10 +32,11 @@ commandRun program stack@(shead:smid:stail) (x, y) direction =
         int <- getLine
         loopCommands program ((read int):stack) (x, y) direction False
     OutputChar -> do
-        putStr [chr $ head stack]
+        putChar $ chr $ head stack
         loopCommands program stack (x, y) direction False
     OutputInt -> do
         putStr $ show $ head stack
+        hFlush stdout
         loopCommands program stack (x, y) direction False
     OutputNewline -> do
         putStrLn ""

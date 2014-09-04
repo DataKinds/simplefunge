@@ -18,6 +18,8 @@
 
 - o = output integer
 
+- n = output newline
+
 - 0-9 = push number to top of stack
 
 note: characters get converted to integers on the stack
