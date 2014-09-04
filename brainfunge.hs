@@ -1,6 +1,7 @@
 import Parser
 import Data.Char
 import System.Environment
+import System.IO
 
 zeroStack :: Stack
 zeroStack = repeat 0
@@ -31,6 +32,7 @@ commandRun program stack@(shead:smid:stail) (x, y) direction
         loopCommands program ((read int):stack) (x, y) direction False
     | program `getFromArray` (x, y) == OutputChar = do
         putChar $ chr $ head stack
+        hFlush stdout
         loopCommands program stack (x, y) direction False
     | program `getFromArray` (x, y) == OutputInt = do
         putStr $ show $ head stack
