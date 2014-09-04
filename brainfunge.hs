@@ -34,12 +34,12 @@ commandRun program stack@(shead:smid:stail) (x, y) direction =
     IfVertical -> loopCommands program stack (x, y) (if shead>0 then UpD else DownD) False
     InputChar -> do
         char <- getCharWithoutNewline
-        loopCommands program ((ord char):stack) (x, y) direction False
+        loopCommands program ((toInteger $ ord char):stack) (x, y) direction False
     InputInt -> do
         int <- getLine
         loopCommands program ((read int):stack) (x, y) direction False
     OutputChar -> do
-        putChar $ chr $ head stack
+        putChar $ chr $ fromIntegral $ head stack
         loopCommands program stack (x, y) direction False
     OutputInt -> do
         putStr $ show $ head stack
@@ -65,8 +65,8 @@ commandRun program stack@(shead:smid:stail) (x, y) direction =
     Pop -> loopCommands program (drop 1 stack) (x, y) direction False
     Dup -> loopCommands program (shead:shead:smid:stail) (x, y) direction False
     Switch -> loopCommands program (smid:shead:stail) (x, y) direction False
-    MoveFrom -> loopCommands program ((stack !! shead):smid:((take (shead-1) stack)++(drop shead stack))) (x, y) direction False
-    MoveTo -> loopCommands program ((take shead stail)++[smid]++(drop shead stail)) (x, y) direction False
+    MoveFrom -> loopCommands program ((stack !! (fromIntegral shead)):smid:((take ((fromIntegral shead)-1) stack)++(drop (fromIntegral shead) stack))) (x, y) direction False
+    MoveTo -> loopCommands program ((take (fromIntegral shead) stail)++[smid]++(drop (fromIntegral shead) stail)) (x, y) direction False
     End -> loopCommands program stack (x, y) direction True
     Noop -> loopCommands program stack (x, y) direction False
 

@@ -34,7 +34,7 @@ module Parser where
                     deriving (Show, Eq)
     data Directions = UpD | DownD | LeftD | RightD
 
-    type Stack = [Int]
+    type Stack = [Integer]
     type TwoDimProgramChar = [[Char]]
     type TwoDimProgram = [[Commands]]
     type Coords = (Int, Int)
