@@ -28,7 +28,7 @@ dropFromIndex stack@(shead:stail) index = (init xs)++ys
     where (xs, ys) = splitAt index stack
 
 splice :: Stack -> Stack
-splice stack@(shead:smid:stail) = (st !! fromIntegral shead):(dropFromIndex st (fromIntegral shead))
+splice stack@(shead:smid:stail) = (st !! fromIntegral shead):(dropFromIndex st ((fromIntegral shead)+1)) --dropFromIndex is one indexed... :(
     where st = smid:stail
 
 commandRun :: TwoDimProgram -> Stack -> Coords -> Directions -> IO ()
@@ -73,7 +73,7 @@ commandRun program stack@(shead:smid:stail) (x, y) direction =
     Pop -> loopCommands program (drop 1 stack) (x, y) direction False
     Dup -> loopCommands program (shead:shead:smid:stail) (x, y) direction False
     Switch -> loopCommands program (smid:shead:stail) (x, y) direction False
---    MoveFrom -> loopCommands program (splice stack) (x, y) direction False
+    MoveFrom -> loopCommands program (splice stack) (x, y) direction False
     MoveTo -> loopCommands program ((take (fromIntegral shead) stail)++[smid]++(drop (fromIntegral shead) stail)) (x, y) direction False
     End -> loopCommands program stack (x, y) direction True
     Noop -> loopCommands program stack (x, y) direction False
