@@ -30,11 +30,11 @@ note: this is standard style, it just takes the latest char of all the input to 
 
 - 0-9 = push number to top of stack
 
-- + = add numbers on top of stack
+- \+ = add numbers on top of stack
 
-- - = subtract numbers on top of stack, going backwards, as in "top - second to top"
+- \- = subtract numbers on top of stack, going backwards, as in "top - second to top"
 
-- * = multiply numbers on top of stack
+- \* = multiply numbers on top of stack
 
 - / = divide numbers on top of stack, going backwards, as in "top / second to top", and places the result on the stack with the top being "divisor", then the next being "remainder"
 
