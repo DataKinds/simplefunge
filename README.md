@@ -2,7 +2,7 @@ You only need the simplefunge.rb file unless you have an explicit reason to want
 
 - < = move cursor left until a direction change command is encountered
 
-- > = move cursor right until a direction change command is encountered
+- \> = move cursor right until a direction change command is encountered
 
 - ^ = move cursor up until a direction change command is encountered
 
@@ -24,7 +24,7 @@ note: this is standard style, it just takes the latest char of all the input to 
 
 - o = output integer
 
-- # = output stack for debugging purposes
+- \# = output stack for debugging purposes
 
 - n = output newline
 
