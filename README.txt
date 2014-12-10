@@ -12,17 +12,17 @@
 
 - I = input character
 
+note: this is standard style, it just takes the latest char of all the input to the program
+
 - i = input integer
 
 - O = output character
 
 - o = output integer
 
-- n = output newline
+note: characters get converted to integers on the stack
 
 - 0-9 = push number to top of stack
-
-note: characters get converted to integers on the stack
 
 - + = add numbers on top of stack
 
@@ -34,7 +34,7 @@ note: characters get converted to integers on the stack
 
 - ` =  pop top of stack
 
-- ! = duplicate top of stack (OH GOD THERE ARE TWO OF THEM)
+- ! = duplicate top of stack
 
 - & = switch the top two values on the stack
 
