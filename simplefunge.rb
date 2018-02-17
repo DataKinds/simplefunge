@@ -72,7 +72,7 @@ while not done
 		when ?!
 			genericOneArg { |n1| $stack.unshift n1; $stack.unshift n1; } #genericOneArg is destructive
 		when ?&
-			genericTwoArg { |n1, n2| $stack[0] = n2, $stack[1] = n1 }
+			genericTwoArg { |n1, n2| $stack.unshift(n2, n1) }
 		when ?| #can't figure out how to do this one generically
 			i = $stack.shift
 			if i >= $stack.length
